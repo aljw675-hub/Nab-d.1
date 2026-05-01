@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نبض الإبداع | صفحة ويب من تصميمي</title>
+  <style>
+    :root{
+      --bg:#0f172a;
+      --bg2:#111827;
+      --card:#1f2937cc;
+      --text:#f8fafc;
+      --muted:#cbd5e1;
+      --primary:#22c55e;
+      --secondary:#38bdf8;
+      --accent:#f59e0b;
+      --border:rgba(255,255,255,.12);
+      --shadow:0 15px 40px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family: "Tahoma", "Arial", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(56,189,248,.14), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(34,197,94,.12), transparent 25%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter: blur(14px);
+      background: rgba(15, 23, 42, .65);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      max-width:1200px;
+      margin:auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      font-size:1.1rem;
+      letter-spacing:.2px;
+    }
+    .logo-badge{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--secondary),var(--primary));
+      color:#fff;
+      box-shadow:var(--shadow);
+      font-size:1.2rem;
+    }
+    nav ul{
+      list-style:none;
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:700;
+      transition:.25s;
+    }
+    nav a:hover{color:#fff}
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .btn{
+      border:none;
+      outline:none;
+      cursor:pointer;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:800;
+      transition:.25s;
+      color:#fff;
+      background:linear-gradient(135deg,var(--secondary),var(--primary));
+      box-shadow:var(--shadow);
+    }
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+    .btn.ghost{
+      background:transparent;
+      border:1px solid var(--border);
+      box-shadow:none;
+      color:var(--text);
+    }
+    .menu-btn{
+      display:none;
+      background:transparent;
+      border:1px solid var(--border);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+    }
+
+    /* Hero */
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:30px 20px 80px;
+    }
+    .hero{
+      min-height:calc(100vh - 90px);
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      align-items:center;
+      gap:30px;
+    }
+    .hero h1{
+      font-size:clamp(2.2rem, 5vw, 4.5rem);
+      line-height:1.15;
+      margin-bottom:16px;
+    }
+    .hero h1 span{
+      background:linear-gradient(135deg,var(--secondary),var(--primary),var(--accent));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .hero p{
+      color:var(--muted);
+      font-size:1.08rem;
+      line-height:1.9;
+      max-width:650px;
+      margin-bottom:26px;
+    }
+    .hero .cta{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:28px;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:10px;
+    }
+    .stat{
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      text-align:center;
+      box-shadow:var(--shadow);
+    }
+    .stat strong{
+      display:block;
+      font-size:1.5rem;
+      margin-bottom:6px;
+      color:#fff;
+    }
+    .stat span{color:var(--muted);font-size:.95rem}
+
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid var(--border);
+      border-radius:28px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(56,189,248,.25), transparent 70%);
+      top:-60px;
+      left:-60px;
+    }
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(34,197,94,.20), transparent 70%);
+      bottom:-50px;
+      right:-50px;
+    }
+    .hero-panel{
+      position:relative;
+      z-index:1;
+    }
+    .mini-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid var(--border);
+      color:#fff;
+      margin-bottom:18px;
+      font-weight:700;
+    }
+    .mockup{
+      background:rgba(15,23,42,.85);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:18px;
+      margin-top:14px;
+    }
+    .mockup .top{
+      display:flex;
+      gap:8px;
+      margin-bottom:16px;
+    }
+    .dot{
+      width:12px;height:12px;border-radius:50%;
+      background:#ef4444;
+    }
+    .dot:nth-child(2){background:#f59e0b}
+    .dot:nth-child(3){background:#22c55e}
+    .widget{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .widget .box{
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:16px;
+      min-height:120px;
+    }
+    .box h4{margin-bottom:8px}
+    .box p{color:var(--muted);line-height:1.7;font-size:.95rem}
+
+    /* Sections */
+    section{
+      padding:70px 0;
+    }
+    .section-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:16px;
+      margin-bottom:26px;
+      flex-wrap:wrap;
+    }
+    .section-title h2{
+      font-size:clamp(1.6rem, 3vw, 2.4rem);
+      margin-bottom:6px;
+    }
+    .section-title p{color:var(--muted);line-height:1.8;max-width:650px}
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .card{
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      transition:.25s;
+    }
+    .card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.22)}
+    .icon{
+      width:54px;height:54px;border-radius:16px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--secondary),var(--primary));
+      margin-bottom:16px;
+      font-size:1.4rem;
+    }
+    .card h3{margin-bottom:10px}
+    .card p{color:var(--muted);line-height:1.8}
+
+    .portfolio{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .work{
+      overflow:hidden;
+      padding:0;
+    }
+    .work .preview{
+      height:180px;
+      background:
+        linear-gradient(135deg, rgba(56,189,248,.9), rgba(34,197,94,.85)),
+        url('') center/cover no-repeat;
+      position:relative;
+    }
+    .work:nth-child(2) .preview{
+      background:linear-gradient(135deg, rgba(245,158,11,.92), rgba(239,68,68,.82));
+    }
+    .work:nth-child(3) .preview{
+      background:linear-gradient(135deg, rgba(168,85,247,.92), rgba(56,189,248,.82));
+    }
+    .work .content{padding:18px 20px 22px}
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid var(--border);
+      color:#fff;
+      font-size:.85rem;
+      margin-bottom:12px;
+    }
+
+    .contact{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      align-items:start;
+    }
+    form{
+      display:grid;
+      gap:12px;
+    }
+    input, textarea{
+      width:100%;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      outline:none;
+      font-family:inherit;
+    }
+    input::placeholder, textarea::placeholder{color:#cbd5e199}
+    textarea{min-height:140px;resize:vertical}
+
+    .info-list{
+      display:grid;
+      gap:12px;
+    }
+    .info-item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      padding:16px;
+      border-radius:18px;
+    }
+    .info-item .bubble{
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--secondary),var(--primary));
+      flex-shrink:0;
+    }
+    .info-item p{color:var(--muted);line-height:1.7}
+
+    footer{
+      padding:20px;
+      border-top:1px solid var(--border);
+      text-align:center;
+      color:var(--muted);
+      background:rgba(15,23,42,.55);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero,
+      .contact,
+      .grid-3,
+      .portfolio{
+        grid-template-columns:1fr;
+      }
+      .hero{
+        min-height:auto;
+        padding-top:30px;
+      }
+      .stats{grid-template-columns:1fr}
+      nav ul{
+        position:fixed;
+        top:76px;
+        right:20px;
+        left:20px;
+        background:rgba(15,23,42,.96);
+        border:1px solid var(--border);
+        border-radius:20px;
+        padding:18px;
+        display:none;
+        flex-direction:column;
+        gap:14px;
+        box-shadow:var(--shadow);
+      }
+      nav ul.show{display:flex}
+      .menu-btn{display:inline-block}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <div class="logo-badge">✦</div>
+        <div>
+          <div>نبض الإبداع</div>
+          <small style="color:var(--muted);font-weight:600">Web Design by Me</small>
+        </div>
+      </div>
+
+      <nav>
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <ul id="navLinks">
+          <li><a href="#home">الرئيسية</a></li>
+          <li><a href="#services">الخدمات</a></li>
+          <li><a href="#works">الأعمال</a></li>
+          <li><a href="#contact">تواصل</a></li>
+        </ul>
+      </nav>
+
+      <div class="actions">
+        <button class="btn ghost" id="themeBtn">الوضع الليلي</button>
+        <a href="#contact" style="text-decoration:none">
+          <button class="btn">ابدأ الآن</button>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="home">
+    <section class="hero">
+      <div>
+        <div class="mini-badge">🚀 صفحة ويب أصلية من الصفر</div>
+        <h1>ويب مودرن عربي <br> بتصميم <span>من دماغي</span></h1>
+        <p>
+          هذه صفحة هبوط أنيقة ومتكاملة، صممتها بشكل عصري ومرن ومناسبة للعرض الشخصي أو التجاري.
+          تقدر تعتبرها نقطة بداية لموقعك، وأنا أقدر أعدلها لك على حسب المجال اللي تريده.
+        </p>
+
+        <div class="cta">
+          <a href="#services" style="text-decoration:none">
+            <button class="btn">شاهد الخدمات</button>
+          </a>
+          <a href="#works" style="text-decoration:none">
+            <button class="btn ghost">تصفح الأعمال</button>
+          </a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>100%</strong>
+            <span>تصميم أصلي</span>
+          </div>
+          <div class="stat">
+            <strong>RTL</strong>
+            <span>واجهة عربية</span>
+          </div>
+          <div class="stat">
+            <strong>1 File</strong>
+            <span>HTML واحد</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-panel">
+          <div class="mini-badge">✨ معاينة ذكية</div>
+          <div class="mockup">
+            <div class="top">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <div class="widget">
+              <div class="box">
+                <h4>تصميم واجهة</h4>
+                <p>ألوان متدرجة، بطاقات عصرية، وحركة بسيطة تعطي طابع احترافي.</p>
+              </div>
+              <div class="box">
+                <h4>تجاوب كامل</h4>
+                <p>يشتغل بشكل ممتاز على الجوال، التابلت، والكمبيوتر.</p>
+              </div>
+              <div class="box">
+                <h4>تبديل الوضع</h4>
+                <p>زر بسيط لتجربة شكل مختلف للوصف الداكن.</p>
+              </div>
+              <div class="box">
+                <h4>جاهز للتطوير</h4>
+                <p>تقدر تضيف صفحات، صور، أو نموذج تسجيل بسهولة.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-title">
+        <div>
+          <h2>الخدمات</h2>
+          <p>ثلاثة اتجاهات رئيسية يمكن تطويرها لأي مشروع: عرض، تسويق، أو تعريف بالهوية.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">🎨</div>
+          <h3>تصميم واجهات</h3>
+          <p>تنسيق حديث مع ألوان متناسقة وتوزيع نظيف للعناصر لراحة العين وسهولة التصفح.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>أداء وسرعة</h3>
+          <p>ملف واحد خفيف وسريع التحميل، بدون مكتبات خارجية أو تعقيد إضافي.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📱</div>
+          <h3>استجابة للجوال</h3>
+          <p>القائمة والبطاقات تتكيف تلقائيًا مع الشاشات الصغيرة بشكل مرتب وواضح.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="works">
+      <div class="section-title">
+        <div>
+          <h2>نماذج أعمال</h2>
+          <p>هذه أمثلة شكلية لمشاريع يمكنك استبدالها بمنتجات أو خدمات حقيقية.</p>
+        </div>
+      </div>
+
+      <div class="portfolio">
+        <div class="card work">
+          <div class="preview"></div>
+          <div class="content">
+            <span class="tag">Landing Page</span>
+            <h3>واجهة تعريفية</h3>
+            <p>تصميم بسيط واحترافي مناسب للشركات الناشئة والعلامات الشخصية.</p>
+          </div>
+        </div>
+
+        <div class="card work">
+          <div class="preview"></div>
+          <div class="content">
+            <span class="tag">Branding</span>
+            <h3>هوية رقمية</h3>
+            <p>تدرجات لونية وكتل واضحة تعطي انطباعًا قويًا وحديثًا.</p>
+          </div>
+        </div>
+
+        <div class="card work">
+          <div class="preview"></div>
+          <div class="content">
+            <span class="tag">Creative UI</span>
+            <h3>تجربة تفاعلية</h3>
+            <p>إضافات خفيفة مثل الحركة والتبديل لتعزيز الشكل العام للموقع.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-title">
+        <div>
+          <h2>تواصل معي</h2>
+          <p>إذا أردت أحول هذا التصميم إلى موقع خاص بمجالك، أرسل لي اسم المجال أو الملف المطلوب.</p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="card">
+          <h3 style="margin-bottom:14px">أرسل رسالة</h3>
+          <form onsubmit="event.preventDefault(); alert('تم الإرسال بنجاح!');">
+            <input type="text" placeholder="اسمك" required />
+            <input type="email" placeholder="البريد الإلكتروني" required />
+            <textarea placeholder="اكتب رسالتك هنا..." required></textarea>
+            <button class="btn" type="submit">إرسال</button>
+          </form>
+        </div>
+
+        <div class="info-list">
+          <div class="info-item">
+            <div class="bubble">💬</div>
+            <div>
+              <h4>دعم التعديل</h4>
+              <p>أقدر أغير الألوان، النصوص، الأقسام، أو أحولها لموقع متجر أو بروفايل.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="bubble">🛠️</div>
+            <div>
+              <h4>ملف واحد فقط</h4>
+              <p>كل شيء موجود داخل HTML: CSS + JavaScript + المحتوى، بدون أي ملفات إضافية.</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="bubble">🌙</div>
+            <div>
+              <h4>الوضع الليلي</h4>
+              <p>يمكنك التبديل بين الشكل الافتراضي وشكل أبسط حسب راحتك.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 - تصميم ويب أصلي من الذكاء الاصطناعي | نبض الإبداع
+  </footer>
+
+  <script>
+    const themeBtn = document.getElementById('themeBtn');
+    const body = document.body;
+    let light = false;
+
+    themeBtn.addEventListener('click', () => {
+      light = !light;
+
+      if (light) {
+        body.style.setProperty('--bg', '#f8fafc');
+        body.style.setProperty('--bg2', '#e2e8f0');
+        body.style.setProperty('--card', 'rgba(255,255,255,.8)');
+        body.style.setProperty('--text', '#0f172a');
+        body.style.setProperty('--muted', '#475569');
+        body.style.setProperty('--border', 'rgba(15,23,42,.12)');
+        body.style.background =
+          'radial-gradient(circle at top right, rgba(56,189,248,.16), transparent 25%),' +
+          'radial-gradient(circle at bottom left, rgba(34,197,94,.12), transparent 25%),' +
+          'linear-gradient(180deg, #f8fafc, #e2e8f0)';
+        themeBtn.textContent = 'الوضع النهاري';
+      } else {
+        body.style.setProperty('--bg', '#0f172a');
+        body.style.setProperty('--bg2', '#111827');
+        body.style.setProperty('--card', 'rgba(255,255,255,.08)');
+        body.style.setProperty('--text', '#f8fafc');
+        body.style.setProperty('--muted', '#cbd5e1');
+        body.style.setProperty('--border', 'rgba(255,255,255,.12)');
+        body.style.background =
+          'radial-gradient(circle at top right, rgba(56,189,248,.14), transparent 25%),' +
+          'radial-gradient(circle at bottom left, rgba(34,197,94,.12), transparent 25%),' +
+          'linear-gradient(180deg, #0f172a, #111827)';
+        themeBtn.textContent = 'الوضع الليلي';
+      }
+    });
+
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+
+    document.querySelectorAll('#navLinks a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+      });
+    });
+  </script>
+</body>
+</html>
